@@ -1,1 +1,1 @@
-*.html	 text diff=cp936_2_utf8
+*.html filter=cp936_to_utf8

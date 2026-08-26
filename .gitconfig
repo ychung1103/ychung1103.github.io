@@ -1,3 +1,3 @@
-[diff "cp936_2_utf8"]
-    textconv = iconv -f cp936 -t utf-8
-    cachetextconv = true
+[filter "cp936_to_utf8"]
+    clean = iconv -f cp936 -t utf-8
+    smudge = iconv -f utf-8 -t cp936
