@@ -1,1 +1,1 @@
-*.html filter=cp936_to_utf8
+# *.html filter=big5_to_utf8
