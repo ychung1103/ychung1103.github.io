@@ -2,12 +2,9 @@
 name: Deploy static content to Pages
 
 on:
-  # Page build and deployment is triggered only after encoding conversion is completed
-  workflow_run:
-    workflows: ["Convert HTML files to UTF-8"]  # 必须和上面 workflow 的 name 完全一致
+  push:
     branches: [ "main" ]
-    types:
-      - completed
+  workflow_dispatch:
 
   # # Allows you to run this workflow manually from the Actions tab
   # workflow_dispatch:
@@ -31,18 +28,79 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    # Only if the encoding conversion is successful
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Detect and convert encoding for new/modified HTML files
+        id: convert
+        run: |
+          echo "=== Converting HTML files to UTF-8 ==="
+
+          # for all .htm/.html files
+          mapfile -t files < <(find . -type f \( -name "*.htm" -o -name "*.html" \) | grep -v ".git")
+
+          if [ ${#files[@]} -eq 0 ]; then
+              echo "No HTML files were changed."
+              echo "converted=false" >> $GITHUB_OUTPUT
+              exit 0
+          fi
+
+          echo "Found ${#files[@]} HTML files to process"
+
+          # 遍历文件，进行编码检测和转换
+          converted_count=0
+          for file in "${files[@]}"; do
+            # 检查文件是否存在，避免处理已删除的文件
+            if [ ! -f "$file" ]; then
+              echo "File $file does not exist anymore. Skipping."
+              continue
+            fi
+
+            # 1. 使用 file 命令检测文件的 MIME 类型和字符集
+            # Method 1: 从 HTML 文件中提取 charset
+            encoding=$(head -n 50 "$file" | grep -iE 'charset\s*=\s*["'']?[^"'';>]+' | head -1 | sed -E 's/.*charset\s*=\s*["'']?([^"'';>]+).*/\1/i' | tr '[:upper:]' '[:lower:]')
+            
+            # Method 2: 如果没找到，尝试从 <meta> 标签中提取（更精确）
+            if [ -z "$encoding" ]; then
+              encoding=$(head -n 50 "$file" | grep -i '<meta' | grep -i 'charset' | head -1 | sed -E 's/.*charset\s*=\s*["'']?([^"'';>]+).*/\1/i' | tr '[:upper:]' '[:lower:]')
+            fi
+            
+            # Method 3: 如果还是没找到，尝试用 file 命令作为备选
+            if [ -z "$encoding" ]; then
+              echo "⚠️  No charset declaration found in $file, using file -i command..."
+              encoding=$(file -i "$file" | awk -F'charset=' '{print $2}')
+            fi
+            echo "Detected encoding for $file: $encoding"
+
+            # 2. 如果检测到的编码不是 UTF-8 或 us-ascii (ascii 是 utf-8 的子集)，则进行转换
+            if [[ "$encoding" != "utf-8" && "$encoding" != "us-ascii" && -n "$encoding" ]]; then
+              echo "Converting $file from $encoding to UTF-8"
+              # 使用 iconv 进行转换，并覆盖原文件
+              # -c 选项忽略无效字符，避免转换失败
+              iconv -f "$encoding" -t "utf-8" "$file" -o "$file.tmp" -c && mv "$file.tmp" "$file"
+              converted_count=$((converted_count+1))
+            else
+              echo "File $file is already UTF-8 or US-ASCII. Skipping conversion."
+            fi
+          done
+
+          echo "converted_count=$converted_count" >> $GITHUB_OUTPUT
+          if [ $converted_count -gt 0 ]; then
+            echo "converted=true" >> $GITHUB_OUTPUT
+          else
+            echo "converted=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
