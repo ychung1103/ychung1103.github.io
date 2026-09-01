@@ -1,5 +1,0 @@
-# Should write the logic below in .git/config
-#
-# [filter "cp936_to_utf8"]
-#     clean = iconv -f gbk -t utf-8
-#     smudge = iconv -f utf-8 -t gbk
