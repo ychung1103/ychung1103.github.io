@@ -1,0 +1,81 @@
+name: Convert HTML files to UTF-8
+
+# 触发条件：当 push 到 main 或 master 分支时运行
+# 你也可以根据需要添加 pull_request 等触发条件
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  encoding-check-and-convert:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # 赋予写入权限，以便自动提交更改
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 拉取所有历史，确保能正确检测变更文件
+
+      - name: Detect and convert encoding for new/modified HTML files
+        id: convert
+        run: |
+          # 检测本次提交新增或修改的 .htm / .html 文件
+          changed_files=$(git diff --name-only --diff-filter=AM HEAD^ HEAD | grep -E '\.(htm|html)$' || true)
+
+          if [ -z "$changed_files" ]; then
+            echo "No HTML files were changed."
+            echo "converted=false" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          echo "Changed HTML files:"
+          echo "$changed_files"
+
+          # 遍历文件，进行编码检测和转换
+          converted_count=0
+          for file in $changed_files; do
+            # 检查文件是否存在，避免处理已删除的文件
+            if [ ! -f "$file" ]; then
+              echo "File $file does not exist anymore. Skipping."
+              continue
+            fi
+
+            # 1. 使用 file 命令检测文件的 MIME 类型和字符集
+            encoding=$(file -i "$file" | awk -F'charset=' '{print $2}')
+            echo "Detected encoding for $file: $encoding"
+
+            # 2. 如果检测到的编码不是 UTF-8 或 us-ascii (ascii 是 utf-8 的子集)，则进行转换
+            if [[ "$encoding" != "utf-8" && "$encoding" != "us-ascii" && -n "$encoding" ]]; then
+              echo "Converting $file from $encoding to UTF-8"
+              # 使用 iconv 进行转换，并覆盖原文件
+              # -c 选项忽略无效字符，避免转换失败
+              iconv -f "$encoding" -t "utf-8" "$file" -o "$file.tmp" -c && mv "$file.tmp" "$file"
+              converted_count=$((converted_count+1))
+            else
+              echo "File $file is already UTF-8 or US-ASCII. Skipping conversion."
+            fi
+          done
+
+          echo "converted_count=$converted_count" >> $GITHUB_OUTPUT
+          if [ $converted_count -gt 0 ]; then
+            echo "converted=true" >> $GITHUB_OUTPUT
+          else
+            echo "converted=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push if changes were made
+        if: steps.convert.outputs.converted == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          # 如果有文件被修改，则提交更改
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: auto-convert HTML file encoding to UTF-8"
+            git push
+          else
+            echo "No changes to commit after conversion."
+          fi
