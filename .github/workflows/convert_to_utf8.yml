@@ -23,7 +23,7 @@ jobs:
         id: convert
         run: |
           # 检测本次提交新增或修改的 .htm / .html 文件
-          mapfile -t files < <(git diff --name-only --diff-filter=AM HEAD^ HEAD | grep -E '\.(htm|html)$')
+          mapfile -t files < <(git show --name-only --pretty=format: HEAD | grep -E '\.(htm|html)$')
 
           if [ ${#files[@]} -eq 0 ]; then
               echo "No HTML files were changed."
