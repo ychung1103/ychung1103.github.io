@@ -44,7 +44,19 @@ jobs:
             fi
 
             # 1. 使用 file 命令检测文件的 MIME 类型和字符集
-            encoding=$(file -i "$file" | awk -F'charset=' '{print $2}')
+            # Method 1: 从 HTML 文件中提取 charset
+            encoding=$(head -n 50 "$file" | grep -iE 'charset\s*=\s*["'']?[^"'';>]+' | head -1 | sed -E 's/.*charset\s*=\s*["'']?([^"'';>]+).*/\1/i' | tr '[:upper:]' '[:lower:]')
+            
+            # Method 2: 如果没找到，尝试从 <meta> 标签中提取（更精确）
+            if [ -z "$encoding" ]; then
+              encoding=$(head -n 50 "$file" | grep -i '<meta' | grep -i 'charset' | head -1 | sed -E 's/.*charset\s*=\s*["'']?([^"'';>]+).*/\1/i' | tr '[:upper:]' '[:lower:]')
+            fi
+            
+            # Method 3: 如果还是没找到，尝试用 file 命令作为备选
+            if [ -z "$encoding" ]; then
+              echo "⚠️  No charset declaration found in $file, using file -i command..."
+              encoding=$(file -i "$file" | awk -F'charset=' '{print $2}')
+            fi
             echo "Detected encoding for $file: $encoding"
 
             # 2. 如果检测到的编码不是 UTF-8 或 us-ascii (ascii 是 utf-8 的子集)，则进行转换
