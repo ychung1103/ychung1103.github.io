@@ -1,0 +1,462 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 6.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>Syllabus for Parallel Programming</title>
+<style>
+<!--
+ p.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	line-height:18.0pt;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	margin-left:0cm; margin-right:0cm; margin-top:0cm}
+-->
+</style>
+<style>
+<!--
+a:active     { color: #0000FF }
+a:link       { color: #0000FF }
+a:visited    { color: #0000FF }
+a:visited    { color: #0000FF }
+h1
+	{margin-top:0cm;
+	margin-right:0cm;
+	margin-bottom:6.0pt;
+	margin-left:0cm;
+	text-align:justify;
+	text-justify:inter-ideograph;
+	line-height:18.0pt;
+	page-break-after:avoid;
+	font-size:14.0pt;
+	font-family:"Times New Roman";
+	font-weight:normal}
+table.MsoTableGrid
+	{border:1.0pt solid windowtext;
+	font-size:10.0pt;
+	font-family:"Times New Roman","serif"}
+ table.MsoNormalTable
+	{mso-style-parent:"";
+	font-size:12.0pt;
+	font-family:"Calibri","sans-serif";
+	}
+-->
+</style>
+</head>
+
+<body>
+
+<p class="MsoNormal" align="center" style="text-align:center"><b><u>
+<span lang="EN-US"><font size="3">&nbsp;</font></span></u></b></p>
+<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+<b><u><span lang="EN-US"><font size="5">Syllabus for Heterogeneous System 
+Architecture (</font></span><font size="5" face="標楷體">異質系統架構</font><span lang="EN-US"><font size="5">)</font></span></u></b></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">　</p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">Instructor : </font></span>
+<font size="4" face="標楷體">鍾葉青</font><span lang="EN-US"><font size="4"> (Yeh-Ching 
+Chung)</font></span></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">Office : CSEE635</font></span></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">Phone: Ext. 2971</font></span></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">Goals : Introduction to Heterogeneous System 
+Architecture (HSA).</font></span></p>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">Textbooks : </font></span></p>
+<ul>
+	<li>
+	<p class="MsoListParagraph" style="text-align: justify; text-justify: inter-ideograph; text-indent: -24.0pt; line-height: 18.0pt; margin-left: 69.0pt">
+	<font face="Times New Roman" size="4"><span lang="EN-US">Heterogeneous 
+	Computing with OpenCL By Benedict R. Gaster, Lee Howes, David R. Kaeli, 
+	Perhaad Mistry &amp; Dana Schaa, 2011</span></font></li>
+</ul>
+<p class="MsoNormal" style="text-align: justify; text-justify: inter-ideograph; line-height: 18.0pt; margin-bottom: 6.0pt">
+<span lang="EN-US"><font size="4">References: </font></span></p>
+<ul>
+	<li>
+	<p class="MsoListParagraph" style="text-align: justify; text-justify: inter-ideograph; text-indent: -24.0pt; line-height: 18.0pt; margin-left: 69.0pt">
+	<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+	<font size="4">
+	HSA Platform System Architecture Specification (<a href="../slides/HSA/HSA-SysArch-1.01.pdf">PDF</a>)</font></span></li>
+	<li>
+	<p class="MsoListParagraph" style="text-align: justify; text-justify: inter-ideograph; text-indent: -24.0pt; line-height: 18.0pt; margin-left: 69.0pt">
+	<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+	<font size="4">
+	HSA Programmer’s Reference Manual: HSAIL Virtual ISA and Programming Model, 
+	Compiler Writer’s Guide, and Object Format (<a href="../slides/HSA/HSA-PRM-1.02.pdf">PDF</a>)</font></span></li>
+	<li>
+	<p class="MsoListParagraph" style="text-align: justify; text-justify: inter-ideograph; text-indent: -24.0pt; line-height: 18.0pt; margin-left: 69.0pt">
+	<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+	<font size="4">HSA Runtime API Programmers Reference Manual (<a href="../slides/HSA/HSA-Runtime-1.0.pdf">PDF</a>)</font></span></li>
+</ul>
+<p class="MsoNormal" style="line-height: 18.0pt"><span lang="EN-US">
+<font size="4">Contents:</font></span></p>
+<p class="MsoNormal" style="line-height: 18.0pt"><span lang="EN-US">
+<font size="4">&nbsp;</font></span></p>
+<table class="MsoNormalTable" border="0" cellspacing="0" cellpadding="0" style="width: 843px; border-collapse: collapse">
+	<tr>
+		<td width="80" valign="top" style="width: 47.95pt; border: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: #F2F2F2">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Week</font></span></td>
+		<td width="83" valign="top" style="width: 49.6pt; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: #F2F2F2">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Date</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: 1.0pt solid windowtext; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm; background: #F2F2F2">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Content</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">1</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">3/2</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4"><a href="../slides/HSA/HSA_Introduction.pptx">
+		Introduction to Heterogeneous System Architecture</a></font></span></p></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">2</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">3/9</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4"><a href="../slides/HSA/OpenCL%20tutorial.pptx">OpenCL</a> and 
+		<a href="../slides/HSA/HSAemu-tutorial.pptx">HSAemu Tutorial</a></font></span><p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="en-us"><font size="4">
+		<span style="font-family: 'Times New Roman',serif">
+		<a href="../homework/HSA/hsa_hw1.pptx">HW#1</a></span></font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">3</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">3/16</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">
+		<a href="../slides/HSA/HSA%20Hardware%20Specification.pptx">HSA Platform System Architecture Specification</a>&nbsp;&nbsp; </font>
+		</span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">4</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; ">
+		<font size="4">3/23</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4"><a href="../slides/HSA/HSAruntime_HSAcourse_v1.0.pptx">HSA Runtime Specification</a></font></span></p>
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HW#1 due</font></span><p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="en-us"><font size="4">
+		<span style="font-family: 'Times New Roman',serif">
+		<a href="../homework/HSA/hsa_hw2.pptx">HW#2</a></span></font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">5</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; color: black">
+		<font size="4">3/30</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<a href="../slides/HSA/HSAIL.pptx">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HSA</font></span><font size="4"><span lang="en-us" style="font-family: 'Times New Roman',serif">IL</span></font></a></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">6</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; ">
+		<font size="4" color="#FF0000">4/6</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: '標楷體'">
+		<font size="4" color="#FF0000">清明節補假一天</font></span><p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HW#2 due</font></span><p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="en-us"><font size="4">
+		<span style="font-family: 'Times New Roman',serif">HW#3</span></font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">7</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; color: black">
+		<font size="4">4/13</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4"><a href="../slides/HSA/Image.pptx">Image Processing in HSA</a>&nbsp; </font></span>
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Term project proposal due</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">8</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; ">
+		<font size="4">4/20</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : 
+		<a href="../slides/HSA/Kaveri%20Kernel%20Mode%20Driver.pptx">Kaveri Kernel Mode Driver</a> (</font></span><font size="4"><span style="font-family: 標楷體">黃昱儒</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></p>
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HW3 due</font></span><p class="MsoNormal">
+		<span lang="en-us"><font size="4">
+		<span style="font-family: 'Times New Roman',serif">HW#4</span></font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">9</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">4/27</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : </font></span><span style="color: black">
+		<font size="4">
+		<a href="../slides/HSA/2015-04-27%20HSA%20System%20Emulation%20and%20Performance%20Evaluation.ppt">
+		HSA System Emulation and Performance Evaluation</a></font></span><span lang="EN-US"><font size="4"> </font></span>
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">(</font></span><font size="4"><span style="font-family: 標楷體">洪士灝</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">10</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; ">
+		<font size="4">5/4</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : MTK talk (<a href="../slides/HSA/NTHU_Talk%202015_May00.pptx">slide-1</a>,
+		<a href="../slides/HSA/NTHU_Talk%202015_May01.pptx">slide-2</a>)</font></span></p>
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HW4 due</font></span><p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="en-us"><font size="4">
+		<span style="font-family: 'Times New Roman',serif">HW#5</span></font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">11</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">5/11</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : 
+		<a href="../slides/HSA/HSA-NTHU-20150511-Tsao.pdf">Power Modeling for HSA Platform</a> (</font></span><font size="4"><span style="font-family: 標楷體">曹孝櫟</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">12</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif; ">
+		<font size="4">5/18</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : Cycle-Accurate HSA Simulator (</font></span><font size="4"><a href="../slides/HSA/Cycle-Accurate%20HSA%20Simulator.pdf">slide-1</a>,
+		<a href="../slides/HSA/Configurable%20Full%20System%20Vertical%20Profiling%20and%20Analysis%20for%20Android-based%20SoC.pdf">
+		slide-2</a>, <span style="font-family: 標楷體">陳添福</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></p>
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">HW5 due</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">13</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">5/25</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Case study : 
+		<a href="../slides/HSA/Trace%20processing%20for%20HSA.pptx">Trace-Based Time Modeling Techniques</a> (</font></span><font size="4"><span style="font-family: 標楷體">金仲達</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">14</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">6/1</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Final Presentation (</font></span><font size="4"><span style="font-family: 標楷體">一</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">15</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">6/8</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Final Presentation (</font></span><font size="4"><span style="font-family: 標楷體">二</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">16</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">6/15</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Final Presentation (</font></span><font size="4"><span style="font-family: 標楷體">三</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+	<tr>
+		<td width="80" valign="top" style="width:47.95pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">17</font></span></td>
+		<td width="83" valign="top" style="width:49.6pt;border-top:none;border-left:none;
+  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+		<p class="MsoNormal" align="center" style="text-align: center; line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">6/22</font></span></td>
+		<td valign="top" style="width: 620px; border-left: medium none; border-right: 1.0pt solid windowtext; border-top: medium none; border-bottom: 1.0pt solid windowtext; padding-left: 5.4pt; padding-right: 5.4pt; padding-top: 0cm; padding-bottom: 0cm">
+		<p class="MsoNormal" style="line-height: 18.0pt">
+		<span lang="EN-US" style="font-family: 'Times New Roman',serif">
+		<font size="4">Final Presentation (</font></span><font size="4"><span style="font-family: 標楷體">四</span></font><span lang="EN-US" style="font-family: 'Times New Roman',serif"><font size="4">)</font></span></td>
+	</tr>
+</table>
+<p class="MsoNormal" style="line-height: 18.0pt">　</p>
+<p class="MsoNormal"><font size="4">Grading:</font></p>
+<p class="MsoNormal"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp; Homework: 60%</font></p>
+<p class="MsoNormal"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp; Term Project: 30%</font></p>
+<p class="MsoNormal"><font size="4">&nbsp;&nbsp;&nbsp;&nbsp; Participation: 10%</font></p>
+<p class="MsoNormal">　</p>
+<p class="MsoNormal"><font size="4">TAs: </font><font face="標楷體" size="4">彭飛、
+孫維志、蕭睿、郭哲洋</font></p>
+
+</body>
+
+</html>
