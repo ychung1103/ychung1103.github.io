@@ -1,0 +1,1 @@
+c:\Masm615\ML -c -coff %1.asm

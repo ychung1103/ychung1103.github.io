@@ -1,0 +1,278 @@
+Microsoft (R) Macro Assembler Version 6.13.7299		    09/03/01 23:34:02
+D:\Kip\AsmBook4\Examples\HLL_Linking\VisualCPP\ArraySum\Arra  Page 1 - 1
+
+
+					TITLE	D:\Kip\AsmBook4\Examples\HLL_Linking\VisualCPP\ArraySum\ArraySum.cpp
+					.386P
+				include listing.inc
+			      C ;; LISTING.INC
+			      C ;;
+			      C ;; This file contains assembler macros and is included by the files created
+			      C ;; with the -FA compiler switch to be assembled by MASM (Microsoft Macro
+			      C ;; Assembler).
+			      C ;;
+			      C ;; Copyright (c) 1993, Microsoft Corporation. All rights reserved.
+			      C 
+			      C ;; non destructive nops
+			      C npad macro size
+			      C if size eq 1
+			      C   nop
+			      C else
+			      C  if size eq 2
+			      C    mov edi, edi
+			      C  else
+			      C   if size eq 3
+			      C     ; lea ecx, [ecx+00]
+			      C     DB 8DH, 49H, 00H
+			      C   else
+			      C    if size eq 4
+			      C      ; lea esp, [esp+00]
+			      C      DB 8DH, 64H, 24H, 00H
+			      C    else
+			      C     if size eq 5
+			      C       add eax, DWORD PTR 0
+			      C     else
+			      C      if size eq 6
+			      C        ; lea ebx, [ebx+00000000]
+			      C        DB 8DH, 9BH, 00H, 00H, 00H, 00H
+			      C      else
+			      C       if size eq 7
+			      C 	; lea esp, [esp+00000000]
+			      C 	DB 8DH, 0A4H, 24H, 00H, 00H, 00H, 00H 
+			      C       else
+			      C 	%out error: unsupported npad size
+			      C 	.err
+			      C       endif
+			      C      endif
+			      C     endif
+			      C    endif
+			      C   endif
+			      C  endif
+			      C endif
+			      C endm
+			      C 
+			      C ;; destructive nops
+			      C dpad macro size, reg
+			      C if size eq 1
+			      C   inc reg
+			      C else
+			      C   %out error: unsupported dpad size
+			      C   .err
+			      C endif
+			      C endm
+			      C 
+				.model FLAT
+
+				PUBLIC	?MySub@@YAXXZ					; MySub
+				EXTRN	__fltused:NEAR
+
+ 00000000			_TEXT	SEGMENT
+
+ =-00000004			_A$ = -4
+ =-00000008			_B$ = -8
+ =-0000001C			_name$ = -28
+ =-00000024			_c$ = -36
+
+ 00000000			?MySub@@YAXXZ PROC NEAR					; MySub, COMDAT
+
+ 00000000  55				push	ebp
+ 00000001  8B EC			mov	ebp, esp
+ 00000003  83 EC 64			sub	esp, 100				; local variables
+ 00000006  53				push	ebx
+ 00000007  56				push	esi
+ 00000008  57				push	edi
+
+ 00000009  C6 45 FC 41			mov	BYTE PTR _A$[ebp], 'A'    ; [ebp-4]
+ 0000000D  C7 45 F8			mov	DWORD PTR _B$[ebp], 10			; [ebp-8]
+	   0000000A
+ 00000014  C6 45 E4 42			mov	BYTE PTR _name$[ebp],'B'     ; [ebp-28]
+ 00000018  C7 45 DC			mov	DWORD PTR _c$[ebp], 33333333H   ; [ebp-36]
+	   33333333
+ 0000001F  C7 45 E0			mov	DWORD PTR _c$[ebp+4], 3ff33333H ; [ebp-32]
+	   3FF33333
+
+ 00000026  5F				pop	edi
+ 00000027  5E				pop	esi
+ 00000028  5B				pop	ebx
+ 00000029  8B E5			mov	esp, ebp
+ 0000002B  5D				pop	ebp
+ 0000002C  C3				ret	0
+ 0000002D			?MySub@@YAXXZ ENDP
+
+ 0000002D			_TEXT	ENDS
+				PUBLIC	?ArraySum@@YAHQAHH@Z				; ArraySum
+				;	COMDAT ?ArraySum@@YAHQAHH@Z
+ 0000002D			_TEXT	SEGMENT
+ = 00000008			_array$ = 8
+ = 0000000C			_count$ = 12
+ =-00000004			_sum$ = -4
+ =-00000008			_i$ = -8
+ 0000002D			?ArraySum@@YAHQAHH@Z PROC NEAR				; ArraySum, COMDAT
+
+				; 13   : {
+
+ 0000002D  55				push	ebp
+ 0000002E  8B EC			mov	ebp, esp
+ 00000030  83 EC 48			sub	esp, 72					; 00000048H
+ 00000033  53				push	ebx
+ 00000034  56				push	esi
+ 00000035  57				push	edi
+ 00000036  8D 7D B8			lea	edi, DWORD PTR [ebp-72]
+ 00000039  B9 00000012			mov	ecx, 18					; 00000012H
+ 0000003E  B8 CCCCCCCC			mov	eax, -858993460				; ccccccccH
+ 00000043  F3/ AB			rep stosd
+
+				; 14   : 	int sum = 0;
+
+ 00000045  C7 45 FC			mov	DWORD PTR _sum$[ebp], 0
+	   00000000
+
+				; 15   : 
+				; 16   : 	for(int i = 0; i < count; i++)
+
+ 0000004C  C7 45 F8			mov	DWORD PTR _i$[ebp], 0
+	   00000000
+ 00000053  EB 09			jmp	SHORT $L277
+ 00000055			$L278:
+ 00000055  8B 45 F8			mov	eax, DWORD PTR _i$[ebp]
+ 00000058  83 C0 01			add	eax, 1
+ 0000005B  89 45 F8			mov	DWORD PTR _i$[ebp], eax
+ 0000005E			$L277:
+ 0000005E  8B 4D F8			mov	ecx, DWORD PTR _i$[ebp]
+ 00000061  3B 4D 0C			cmp	ecx, DWORD PTR _count$[ebp]
+ 00000064  7D 11			jge	SHORT $L279
+
+				; 17   : 	  sum += array[i];
+
+ 00000066  8B 55 F8			mov	edx, DWORD PTR _i$[ebp]
+ 00000069  8B 45 08			mov	eax, DWORD PTR _array$[ebp]
+ 0000006C  8B 4D FC			mov	ecx, DWORD PTR _sum$[ebp]
+ 0000006F  03 0C 90			add	ecx, DWORD PTR [eax+edx*4]
+ 00000072  89 4D FC			mov	DWORD PTR _sum$[ebp], ecx
+ 00000075  EB DE			jmp	SHORT $L278
+ 00000077			$L279:
+
+				; 18   : 	
+				; 19   : 	return sum;
+
+ 00000077  8B 45 FC			mov	eax, DWORD PTR _sum$[ebp]
+
+				; 20   : }
+
+ 0000007A  5F				pop	edi
+ 0000007B  5E				pop	esi
+ 0000007C  5B				pop	ebx
+ 0000007D  8B E5			mov	esp, ebp
+ 0000007F  5D				pop	ebp
+ 00000080  C3				ret	0
+ 00000081			?ArraySum@@YAHQAHH@Z ENDP				; ArraySum
+ 00000081			_TEXT	ENDS
+				PUBLIC	_main
+				EXTRN	__chkesp:NEAR
+				;	COMDAT _main
+ 00000081			_TEXT	SEGMENT
+ =-000000C8			_Array$ = -200
+ =-000000CC			_sum$ = -204
+ 00000081			_main	PROC NEAR					; COMDAT
+
+				; 24   : {
+
+ 00000081  55				push	ebp
+ 00000082  8B EC			mov	ebp, esp
+ 00000084  81 EC 0000010C		sub	esp, 268				; 0000010cH
+ 0000008A  53				push	ebx
+ 0000008B  56				push	esi
+ 0000008C  57				push	edi
+ 0000008D  8D BD FFFFFEF4		lea	edi, DWORD PTR [ebp-268]
+ 00000093  B9 00000043			mov	ecx, 67					; 00000043H
+ 00000098  B8 CCCCCCCC			mov	eax, -858993460				; ccccccccH
+ 0000009D  F3/ AB			rep stosd
+
+				; 25   : 	int Array[50];
+				; 26   : 
+				; 27   : 	int sum = ArraySum( Array, 50 );
+
+ 0000009F  6A 32			push	50					; 00000032H
+ 000000A1  8D 85 FFFFFF38		lea	eax, DWORD PTR _Array$[ebp]
+ 000000A7  50				push	eax
+ 000000A8  E8 FFFFFF80			call	?ArraySum@@YAHQAHH@Z			; ArraySum
+ 000000AD  83 C4 08			add	esp, 8
+ 000000B0  89 85 FFFFFF34		mov	DWORD PTR _sum$[ebp], eax
+
+				; 28   : 
+				; 29   : 
+				; 30   : }
+
+ 000000B6  5F				pop	edi
+ 000000B7  5E				pop	esi
+ 000000B8  5B				pop	ebx
+ 000000B9  81 C4 0000010C		add	esp, 268				; 0000010cH
+ 000000BF  3B EC			cmp	ebp, esp
+ 000000C1  E8 00000000 E		call	__chkesp
+ 000000C6  8B E5			mov	esp, ebp
+ 000000C8  5D				pop	ebp
+ 000000C9  C3				ret	0
+ 000000CA			_main	ENDP
+ 000000CA			_TEXT	ENDS
+				END
+Microsoft (R) Macro Assembler Version 6.13.7299		    09/03/01 23:34:02
+D:\Kip\AsmBook4\Examples\HLL_Linking\VisualCPP\ArraySum\Arra  Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+dpad . . . . . . . . . . . . . .	Proc
+npad . . . . . . . . . . . . . .	Proc
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+FLAT . . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 DWord	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 000000CA DWord	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+?ArraySum@@YAHQAHH@Z . . . . . .	P Near	 0000002D _TEXT	Length= 00000054 Public
+  $L278  . . . . . . . . . . . .	L Near	 00000055 _TEXT	
+  $L277  . . . . . . . . . . . .	L Near	 0000005E _TEXT	
+  $L279  . . . . . . . . . . . .	L Near	 00000077 _TEXT	
+?MySub@@YAXXZ  . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000002D Public
+_main  . . . . . . . . . . . . .	P Near	 00000081 _TEXT	Length= 00000049 Public
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 00000000h   
+@DataSize  . . . . . . . . . . .	Number	 00000000h   
+@Interface . . . . . . . . . . .	Number	 00000000h   
+@Model . . . . . . . . . . . . .	Number	 00000007h   
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 FLAT
+@fardata?  . . . . . . . . . . .	Text   	 FLAT
+@fardata . . . . . . . . . . . .	Text   	 FLAT
+@stack . . . . . . . . . . . . .	Text   	 FLAT
+_A$  . . . . . . . . . . . . . .	Number	 -00000004h   
+_B$  . . . . . . . . . . . . . .	Number	 -00000008h   
+__chkesp . . . . . . . . . . . .	L Near	 00000000 FLAT	External
+__fltused  . . . . . . . . . . .	L Near	 00000000 FLAT	External
+_array$  . . . . . . . . . . . .	Number	 -000000C8h   
+_c$  . . . . . . . . . . . . . .	Number	 -00000024h   
+_count$  . . . . . . . . . . . .	Number	 0000000Ch   
+_i$  . . . . . . . . . . . . . .	Number	 -00000008h   
+_name$ . . . . . . . . . . . . .	Number	 -0000001Ch   
+_sum$  . . . . . . . . . . . . .	Number	 -000000CCh   
+
+	   0 Warnings
+	   0 Errors

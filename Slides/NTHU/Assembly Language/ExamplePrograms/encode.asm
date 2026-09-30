@@ -1,0 +1,53 @@
+TITLE Character Encoding Program    					(Encode.asm)
+
+; This program reads an input file and encodes
+; the output using the XLAT instruction.
+; To run it, redirect input at the Command prompt:
+;
+;            encode < input.txt
+;
+; Implemented as a 16-bit application because we can
+; use INT 21h function 6 to input characters without
+; waiting. See Section 13.2.3 for details.
+; Last update: 06/01/02
+
+INCLUDE Irvine16.inc
+
+.data
+codetable LABEL BYTE
+	BYTE 48 DUP(0)		; no translation
+	BYTE '4590821367'		; ASCII codes 48-57
+	BYTE 7 DUP (0)		; no translation
+	BYTE 'GVHZUSOBMIKPJCADLFTYEQNWXR'
+	BYTE 6 DUP (0)		; no translation
+	BYTE 'gvhzusobmikpjcadlftyeqnwxr'
+	BYTE 133 DUP(0)		; no translation
+
+.code
+main PROC
+	mov ax,@data
+	mov ds,ax
+	mov bx,OFFSET codetable
+
+getchar:
+	push bx
+	mov ah,6		; input character, don't wait
+	mov dl,0FFh
+	int 21h		; call DOS
+	pop bx
+	jz  quit		; quit, no input waiting
+	mov dl,al		; save char in DL
+	xlat		; translate the character
+	cmp al,0		; translatable?
+	je  putchar		; no: write it as is
+	mov dl,al		; yes: move new char to DL
+
+putchar:
+	mov  al,dl		; character is in DL
+	call Writechar		; write AL to standard output
+	jmp  getchar		; get another char
+
+quit:
+	exit
+main ENDP
+END main

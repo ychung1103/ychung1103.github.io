@@ -1,0 +1,640 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=Big5">
+<meta name=ProgId content=FrontPage.Editor.Document>
+<meta name=Generator content="Microsoft FrontPage 4.0">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./slide.files/filelist.xml">
+<title>Lecture Slides for CS2422 (Fall 2003)</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>chang</o:Author>
+  <o:LastAuthor>C. Chang</o:LastAuthor>
+  <o:Revision>16</o:Revision>
+  <o:TotalTime>28</o:TotalTime>
+  <o:Created>2002-10-04T09:05:00Z</o:Created>
+  <o:LastSaved>2002-10-30T05:47:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>276</o:Words>
+  <o:Characters>1578</o:Characters>
+  <o:Lines>13</o:Lines>
+  <o:Paragraphs>3</o:Paragraphs>
+  <o:CharactersWithSpaces>1937</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:Compatibility>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:新細明體;
+	panose-1:2 2 3 0 0 0 0 0 0 0;
+	mso-font-alt:PMingLiU;
+	mso-font-charset:136;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 137232384 22 0 1048577 0;}
+@font-face
+	{font-family:標楷體;
+	panose-1:3 0 5 9 0 0 0 0 0 0;
+	mso-font-charset:136;
+	mso-generic-font-family:script;
+	mso-font-pitch:fixed;
+	mso-font-signature:3 137232384 22 0 1048577 0;}
+@font-face
+	{font-family:"\@標楷體";
+	panose-1:3 0 5 9 0 0 0 0 0 0;
+	mso-font-charset:136;
+	mso-generic-font-family:script;
+	mso-font-pitch:fixed;
+	mso-font-signature:3 137232384 22 0 1048577 0;}
+@font-face
+	{font-family:"\@新細明體";
+	panose-1:2 2 3 0 0 0 0 0 0 0;
+	mso-font-charset:136;
+	mso-generic-font-family:roman;
+	mso-font-pitch:variable;
+	mso-font-signature:3 137232384 22 0 1048577 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0cm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:新細明體;
+	mso-bidi-font-family:"Times New Roman";}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0cm;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0cm;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:新細明體;
+	mso-bidi-font-family:"Times New Roman";}
+ /* Page Definitions */
+@page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}
+@page Section1
+	{size:595.3pt 841.9pt;
+	margin:72.0pt 90.0pt 72.0pt 90.0pt;
+	mso-header-margin:42.55pt;
+	mso-footer-margin:49.6pt;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+<meta http-equiv=Content-Language content=zh-tw>
+</head>
+
+<body bgcolor=#FFFFFF lang=ZH-TW link=#0000FF vlink=#0000FF
+style='tab-interval:24.0pt' bgproperties=fixed>
+<!--[if gte mso 9]><xml>
+ <v:background id="_x0000_s1025" o:bwmode="white">
+  <v:fill src="bg1.gif" type="tile"/>
+ </v:background></xml><![endif]-->
+
+<div class=Section1>
+
+<table border=1 cellspacing=3 cellpadding=0 width="96%" style='width:96.0%;
+ mso-cellspacing:1.5pt;mso-padding-alt:0cm 0cm 0cm 0cm'>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p style='margin:0cm;margin-bottom:.0001pt'><span lang=EN-US>Date</span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Covered Topics</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Covered Chapters/Sections</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Emphasized Chapters/Sections</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Comments</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week01a.pdf">September 9 (Tue)</a></span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Introduction</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>September 11 (Thu)</span></p>                
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>No class</p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><font face="標楷體">中秋節</font></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week02a.pdf">September 16 (Tue)</a></span></p>                
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Data Representation; How Program Runs; Registers and Memory</span></p> 
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>1.3, 2.1, 2.2, 2.3</span></p> 
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>2.1.1 and 2.1.2.1,&nbsp; 2.2.1 and                
+  2.2.2,&nbsp;&nbsp;&nbsp;&nbsp; 2.3.1 and 2.3.2.1</span></p>                
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week02b.pdf">September 18 (Thu)</a></span></p>                
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Learning Assembly by Example</span></p> 
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>3.1, 3.2, 3.3</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>3.1, 3.2 (except 3.2.3.1), 3.3.1</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week03a.pdf">September 23 (Tue)</a></span></p>                
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Data Definition; Data Transfer
+  Instructions</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>3.4, 3.5, 4.1</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>3.4, 3.5 (except 3.5.4)</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week03b.pdf">September 25 (Thu)</a></span></p>                
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Indirect Addressing </span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.4 </span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.4</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week04a.pdf">September 30 (Tue)</a></span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Arithmetic Instructions; Jump and Loop </span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.2, 4.5</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.2, 4.5</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week04b.pdf">October 2 (Thu)</a></span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Data Related Operators</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.3</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>4.3 (except 4.3.2, 4.3.7)</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week05a.pdf">October 7 (Tue)</a></span></p>               
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Conditional Processing; Boolean
+  Instructions </span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>6.1, 6.2, 6.3.1-6.3.4, 6.5　</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>6.2.1-6.2.5, 6.3.1-6.3.4, 6.5.1-6.5.3　</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal></p>               
+  </td>
+ </tr>
+ <span style='mso-special-format:lastCR'>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week05b.pdf">October 9 (Thu)</a></span></p>               
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Conditional Loop;</span></p>
+  <p class=MsoNormal><span lang=EN-US>.IF, .WHILE, .REPEAT</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>6.4, 6.7</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>none</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week06a.pdf">October 14 (Tue)</a></span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Stack &amp; Procedures</span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>5.1 to 5.5</span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>5.4, 5.5</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week06b.pdf">October 16 (Thu)</a></span></p>               
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>IA-32 Memory Management　 </span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>2.2, 2.3</span></p>                
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>2.3</span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>　</p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week07a.pdf">October 21 (Tue)</a></span></p>
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Advanced Procedures<o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>Chapter 8<o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US>8.2 to 8.5　<o:p></o:p></span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span             
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><span lang=EN-US><a href="Week07b.pdf">October 23 (Thu)</a></span></p>  
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;Macros<![endif]><span
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;10.2, Chapter 9<![endif]><span              
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;10.2<![endif]><span
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  lang=EN-US><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  October 28 (Tue)
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  Midterm Exam
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  </span>　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　               
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　              
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　             
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　            
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　              
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　           
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　          
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　             
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　          
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　 
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　         
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+ 　     
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　      
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　   
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　        
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　 
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　      
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　 
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+ <tr>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　        
+  </td>
+  <td width="22%" style='width:22.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="16%" style='width:16.74%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="18%" style='width:18.7%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+  <td width="23%" style='width:23.64%;padding:.75pt .75pt .75pt .75pt'>
+  　
+  </td>
+ </tr>
+</table>
+
+<p>　</p>
+
+</div>
+
+</body>
+
+</html>

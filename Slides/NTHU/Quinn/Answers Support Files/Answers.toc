@@ -1,0 +1,19 @@
+\contentsline {chapter}{Preface}{iii}
+\contentsline {chapter}{\numberline {1}Motivation and History}{1}
+\contentsline {chapter}{\numberline {2}Parallel Architectures}{9}
+\contentsline {chapter}{\numberline {3}Parallel Algorithm Design}{17}
+\contentsline {chapter}{\numberline {4}Message-passing Programming}{29}
+\contentsline {chapter}{\numberline {5}The Sieve of Eratosthenes}{33}
+\contentsline {chapter}{\numberline {6}Floyd's Algorithm}{37}
+\contentsline {chapter}{\numberline {7}Performance Analysis}{41}
+\contentsline {chapter}{\numberline {8}Matrix-vector Multiplication}{47}
+\contentsline {chapter}{\numberline {9}Document Classification}{51}
+\contentsline {chapter}{\numberline {10}Monte Carlo Methods}{53}
+\contentsline {chapter}{\numberline {11}Matrix Multiplication}{57}
+\contentsline {chapter}{\numberline {12}Solving Linear Systems}{59}
+\contentsline {chapter}{\numberline {13}Finite Difference Methods}{63}
+\contentsline {chapter}{\numberline {14}Sorting}{65}
+\contentsline {chapter}{\numberline {15}The Fast Fourier Transform}{73}
+\contentsline {chapter}{\numberline {16}Combinatorial Search}{75}
+\contentsline {chapter}{\numberline {17}Shared-memory Programming}{79}
+\contentsline {chapter}{\numberline {18}Combining MPI and OpenMP}{85}

@@ -1,0 +1,55 @@
+\item This is a difficult problem. I came up with these numbers by actually
+      writing an MPI program implementing the first parallel quicksort
+      algorithm described in the book, then performing a max-reduction to
+      find the maximum partition size. The values in the table represent the
+      average over 10 executions of the program.
+
+\begin{enumerate}
+\item
+
+\begin{tabular}{|r|r|r|}
+\hline
+$p$ & {\it Maximum List Size} & Max list size / $\lceil n/p\rceil$ \\
+\hline
+1  & 100,000 & 1.00 \\
+2  &  71,019 & 1.42 \\
+4  &  56,428 & 2.26 \\
+8  &  39,474 & 3.158 \\
+16 &  36,241 & 5.799 \\
+\hline
+\end{tabular}
+
+\item Parallel execution time is the sum of the computation time and the
+      communication time.
+
+      The computation time has two components: partition
+      time and quicksort time. At each iteration of the algorithm each
+      processor must partition its list of values into two pieces: the piece it
+      is keeping and the piece it is passing. This time is about
+      $$\log p \times m \times 0.000000070 {\rm sec}$$
+      where $m$ is the maximum list size.
+      The quicksort time is
+      $$(0.000000070 {\rm sec})\times (m \times \log m - 2.846 \times \log m)$$
+      (see Baase and Van Gelder [5] for the expected number of comparisons
+      in sequential quicksort).
+
+      The communication time is the time spent exchanging elements.
+      We assume sending and receiving happen concurrently.
+      We estimate the total communication time by the processor with the
+      most elements concurrently sends half of these elements and receives
+      half of these elements each iteration.
+      The total communication time is
+      $$\log p(0.0002 {\rm sec} + (m/2)(4 {\rm bytes})/(10^7 {\rm byte/sec})$$
+
+\begin{tabular}{|r|r|r|}
+\hline
+$p$ & Time (sec) & Speedup \\
+\hline
+1 &  0.141 & 1.00 \\
+2 &  0.116 & 1.21 \\
+4 &  0.106 & 1.33 \\
+8 &  0.083 & 1.70 \\
+16 & 0.086 & 1.64 \\
+\hline
+\end{tabular}
+\end{enumerate}

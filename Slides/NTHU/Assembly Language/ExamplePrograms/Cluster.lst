@@ -1,0 +1,363 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/14/02 11:47:33
+Cluster Display Program           (Cluster.asm)		     Page 1 - 1
+
+
+				TITLE  Cluster Display Program           (Cluster.asm)
+
+				; This program reads the directory of drive A, decodes
+				; the file allocation table, and displays the list of
+				; clusters allocated to each file.
+				; Last update: 9/21/01
+
+				INCLUDE Irvine16.inc
+			      C .NOLIST
+			      C .LIST
+			      C 
+
+				; Attributes specific to 1.44MB diskettes:
+ = 0009				FATSectors = 9	; num sectors, first copy of FAT
+ = 000E				DIRSectors = 14	; num sectors, root directory
+ = 0013				DIR_START = 19	; starting directory sector num
+
+ = 0200				SECTOR_SIZE = 512
+ = 0000				DRIVE_A = 0
+ = 0001				FAT_START = 1	; starting sector of FAT
+ = 0dh,0ah			EOLN equ <0dh,0ah>
+
+ 0020				Directory STRUCT
+ 0000  0008 [				fileName   BYTE 8 dup(?)
+        00
+       ]
+ 0008  0003 [				extension  BYTE 3 dup(?)
+        00
+       ]
+ 000B  00				attribute  BYTE ?
+ 000C  000A [				reserved   BYTE 10 dup(?)
+        00
+       ]
+ 0016  0000				time       WORD ?
+ 0018  0000				date       WORD ?
+ 001A  0000				startingCluster WORD ?
+ 001C  00000000				fileSize   DWORD ?
+				Directory ENDS
+ = 0010				ENTRIES_PER_SECTOR = SECTOR_SIZE / (size Directory)
+
+ 0000				.data
+ 0000				heading LABEL byte
+ 0000  43 6C 75 73 74 65		BYTE  'Cluster Display Program           (CLUSTER.EXE)'
+       72 20 44 69 73 70
+       6C 61 79 20 50 72
+       6F 67 72 61 6D 20
+       20 20 20 20 20 20
+       20 20 20 20 28 43
+       4C 55 53 54 45 52
+       2E 45 58 45 29
+ 002F  0D 0A 0D 0A 54 68		BYTE   EOLN,EOLN,'The following clusters are allocated '
+       65 20 66 6F 6C 6C
+       6F 77 69 6E 67 20
+       63 6C 75 73 74 65
+       72 73 20 61 72 65
+       20 61 6C 6C 6F 63
+       61 74 65 64 20
+ 0058  74 6F 20 65 61 63		BYTE  'to each file:',EOLN,EOLN,0
+       68 20 66 69 6C 65
+       3A 0D 0A 0D 0A 00
+
+ 006A  0900 [			fattable WORD ((FATSectors * SECTOR_SIZE) / 2) DUP(?)
+        0000
+       ]
+ 126A  00E0 [			dirbuf Directory (DIRSectors * ENTRIES_PER_SECTOR) DUP(<>)
+        0008 [
+	 00
+	]
+        0003 [
+	 00
+	] 00
+        000A [
+	 00
+	] 0000 0000 0000
+        00000000
+       ]
+ 2E6A 00			driveNumber BYTE ?
+
+ 0000				.code
+ 0000				main PROC
+ 0000  E8 00AC				call Initialize
+ 0003  B8 126A R			mov  ax,OFFSET dirbuf
+ 0006  B8 2E6A R			mov  ax,OFFSET driveNumber
+ 0009  E8 002C				call LoadFATandDir
+ 000C  72 26				jc   A3		; quit if we failed
+ 000E  BE 126A R			mov  si,OFFSET dirbuf		; index into the directory
+
+ 0011  80 3C 00			A1:	cmp (Directory PTR [si]).filename,0	; entry never used?
+ 0014  74 1E				je  A3		; yes: must be the end
+ 0016  80 3C E5				cmp (Directory PTR [si]).filename,0E5h		; entry deleted?
+ 0019  74 14				je  A2		; yes: skip to next entry
+ 001B  80 3C 2E				cmp (Directory PTR [si]).filename,2Eh ; parent directory?
+ 001E  74 0F				je  A2		; yes: skip to next entry
+ 0020  80 7C 0B 0F			cmp (Directory PTR [si]).attribute,0Fh ; extended filename?
+ 0024  74 09				je  A2
+ 0026  F6 44 0B 18			test (Directory PTR [si]).attribute,18h	; vol or directory name?
+ 002A  75 03				jnz A2                       		; yes: skip to next entry
+ 002C  E8 002A				call displayClusters          		; must be a valid entry
+
+ 002F  83 C6 20			A2:	add   si,32		; point to next entry
+ 0032  EB DD				jmp   A1
+ 0034				A3:	.exit
+ 0038				main ENDP
+
+				;----------------------------------------------------------
+ 0038				LoadFATandDir PROC
+				; Load FAT and root directory sectors.
+				; Receives: nothing
+				; Returns: nothing
+				;----------------------------------------------------------
+ 0038  60				pusha
+					; Load the FAT
+ 0039  B0 00				mov  al,DRIVE_A
+ 003B  B9 0009				mov  cx,FATsectors
+ 003E  BA 0001				mov  dx,FAT_START
+ 0041  BB 006A R			mov  bx,OFFSET fattable
+ 0044  CD 25				int  25h	; read sectors
+ 0046  83 C4 02				add  sp,2	; pop old flags off stack
+					; Load the Directory
+ 0049  B9 000E				mov  cx,DIRsectors
+ 004C  BA 0013				mov  dx,DIR_START
+ 004F  BB 126A R			mov  bx,OFFSET dirbuf
+ 0052  CD 25				int  25h
+ 0054  83 C4 02				add  sp,2
+ 0057  61				popa
+ 0058  C3				ret
+ 0059				LoadFATandDir ENDP
+
+				;----------------------------------------------------------
+ 0059				DisplayClusters PROC
+				; Display all clusters allocated to a single file.
+				; Receives: SI contains the offset of the directory entry.
+				;----------------------------------------------------------
+ 0059  50				push ax
+ 005A  E8 0042				call displayFilename	; display the filename
+ 005D  8B 44 1A				mov  ax,[si+1Ah]	; get first cluster
+ 0060  3D 0FFF			C1:	cmp  ax,0FFFh	; last cluster?
+ 0063  74 0E				je   C2	; yes: quit
+ 0065  BB 000A				mov  bx,10	; choose decimal radix
+ 0068  E8 0000 E			call WriteDec	; display the number
+ 006B  E8 000A				call writeSpace	; display a space
+ 006E  E8 0010				call next_FAT_entry	; returns cluster # in AX
+ 0071  EB ED				jmp  C1	; find next cluster
+ 0073  E8 0000 E		C2:	call Crlf
+ 0076  58				pop  ax
+ 0077  C3				ret
+ 0078				DisplayClusters ENDP
+
+				;----------------------------------------------------------
+ 0078				WriteSpace PROC
+				; Write a single space to standard output.
+				;----------------------------------------------------------
+ 0078  50				push ax
+ 0079  B4 02				mov  ah,2	; function: display character
+ 007B  B2 20				mov  dl,20h	; 20h = space
+ 007D  CD 21				int  21h
+ 007F  58				pop  ax
+ 0080  C3				ret
+ 0081				WriteSpace ENDP
+
+
+				;----------------------------------------------------------
+ 0081				Next_FAT_entry PROC
+				; Find the next cluster in the FAT.
+				; Receives: AX = current cluster number
+				; Returns: AX = new cluster number
+				;----------------------------------------------------------
+ 0081  53				push bx	; save regs
+ 0082  51				push cx
+ 0083  8B D8				mov  bx,ax	; copy the number
+ 0085  D1 EB				shr  bx,1	; divide by 2
+ 0087  03 D8				add  bx,ax	; new cluster OFFSET
+ 0089  8B 97 006A R			mov  dx,fattable[bx]	; DX = new cluster value
+ 008D  D1 E8				shr  ax,1	; old cluster even?
+ 008F  72 06				jc   E1	; no: keep high 12 bits
+ 0091  81 E2 0FFF			and  dx,0FFFh	; yes: keep low 12 bits
+ 0095  EB 03				jmp  E2
+ 0097  C1 EA 04			E1:	shr  dx,4	; shift 4 bits to the right
+ 009A  8B C2			E2:	mov  ax,dx	; return new cluster number
+ 009C  59				pop  cx	; restore regs
+ 009D  5B				pop  bx
+ 009E  C3				ret
+ 009F				Next_FAT_entry ENDP
+
+				;----------------------------------------------------------
+ 009F				DisplayFilename PROC
+				; Display the file name.
+				;----------------------------------------------------------
+ 009F  C6 44 0B 00			mov  byte ptr [si+11],0 	; SI points to filename
+ 00A3  8B D6				mov  dx,si
+ 00A5  E8 0000 E			call Writestring
+ 00A8  B4 02				mov  ah,2               	; display a space
+ 00AA  B2 20				mov  dl,20h
+ 00AC  CD 21				int  21h
+ 00AE  C3				ret
+ 00AF				DisplayFilename ENDP
+
+				;----------------------------------------------------------
+ 00AF				Initialize PROC
+				; Set upt DS, clear screen, display a heading.
+				;----------------------------------------------------------
+ 00AF  B8 ---- R			mov  ax,@data
+ 00B2  8E D8				mov  ds,ax
+ 00B4  E8 0000 E			call ClrScr
+ 00B7  BA 0000 R			mov  dx,OFFSET heading	; display program heading
+ 00BA  E8 0000 E			call Writestring
+ 00BD  C3				ret
+ 00BE				Initialize ENDP
+				END main
+Microsoft (R) Macro Assembler Version 6.15.8803		    10/14/02 11:47:33
+Cluster Display Program           (Cluster.asm)		     Symbols 2 - 1
+
+
+
+
+Macros:
+
+                N a m e                 Type
+
+startup  . . . . . . . . . . . .	Proc
+
+
+Structures and Unions:
+
+                N a m e                  Size
+                                         Offset      Type
+
+Directory  . . . . . . . . . . .	 0020
+  fileName . . . . . . . . . . .	 0000	     Byte
+  extension  . . . . . . . . . .	 0008	     Byte
+  attribute  . . . . . . . . . .	 000B	     Byte
+  reserved . . . . . . . . . . .	 000C	     Byte
+  time . . . . . . . . . . . . .	 0016	     Word
+  date . . . . . . . . . . . . .	 0018	     Word
+  startingCluster  . . . . . . .	 001A	     Word
+  fileSize . . . . . . . . . . .	 001C	     DWord
+ExtGetDskFreSpcStruc . . . . . .	 002C
+  StructSize . . . . . . . . . .	 0000	     Word
+  Level  . . . . . . . . . . . .	 0002	     Word
+  SectorsPerCluster  . . . . . .	 0004	     DWord
+  BytesPerSector . . . . . . . .	 0008	     DWord
+  AvailableClusters  . . . . . .	 000C	     DWord
+  TotalClusters  . . . . . . . .	 0010	     DWord
+  AvailablePhysSectors . . . . .	 0014	     DWord
+  TotalPhysSectors . . . . . . .	 0018	     DWord
+  AvailableAllocationUnits . . .	 001C	     DWord
+  TotalAllocationUnits . . . . .	 0020	     DWord
+  Rsvd . . . . . . . . . . . . .	 0024	     DWord
+TimeRecord . . . . . . . . . . .	 0004
+  hours  . . . . . . . . . . . .	 0000	     Byte
+  minutes  . . . . . . . . . . .	 0001	     Byte
+  seconds  . . . . . . . . . . .	 0002	     Byte
+  hhss . . . . . . . . . . . . .	 0003	     Byte
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 2E6B	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 1000	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 00BE	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+ClrScr . . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Crlf . . . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Delay  . . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+DisplayClusters  . . . . . . . .	P Near	 0059	  _TEXT	Length= 001F Public STDCALL
+  C1 . . . . . . . . . . . . . .	L Near	 0060	  _TEXT	
+  C2 . . . . . . . . . . . . . .	L Near	 0073	  _TEXT	
+DisplayFilename  . . . . . . . .	P Near	 009F	  _TEXT	Length= 0010 Public STDCALL
+DumpMem  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+DumpRegs . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Get_Commandtail  . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Get_Time . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Gotoxy . . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Initialize . . . . . . . . . . .	P Near	 00AF	  _TEXT	Length= 000F Public STDCALL
+IsDigit  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+LoadFATandDir  . . . . . . . . .	P Near	 0038	  _TEXT	Length= 0021 Public STDCALL
+Next_FAT_entry . . . . . . . . .	P Near	 0081	  _TEXT	Length= 001E Public STDCALL
+  E1 . . . . . . . . . . . . . .	L Near	 0097	  _TEXT	
+  E2 . . . . . . . . . . . . . .	L Near	 009A	  _TEXT	
+Random32 . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+RandomRange  . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Randomize  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+ReadChar . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+ReadHex  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+ReadInt  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+ReadString . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Str_compare  . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Str_copy . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Str_length . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Str_trim . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+Str_ucase  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WaitMsg  . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteBin . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteChar  . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteDec . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteHex . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteInt . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+WriteSpace . . . . . . . . . . .	P Near	 0078	  _TEXT	Length= 0009 Public STDCALL
+WriteString  . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0038 Public STDCALL
+  A1 . . . . . . . . . . . . . .	L Near	 0011	  _TEXT	
+  A2 . . . . . . . . . . . . . .	L Near	 002F	  _TEXT	
+  A3 . . . . . . . . . . . . . .	L Near	 0034	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0003h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@cmdline . . . . . . . . . . . .	Text   	 OFFSET __98765765cmdline
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+DIRSectors . . . . . . . . . . .	Number	 000Eh	 
+DIR_START  . . . . . . . . . . .	Number	 0013h	 
+DRIVE_A  . . . . . . . . . . . .	Number	 0000h	 
+ENTRIES_PER_SECTOR . . . . . . .	Number	 0010h	 
+EOLN . . . . . . . . . . . . . .	Text   	 0dh,0ah
+FATSectors . . . . . . . . . . .	Number	 0009h	 
+FAT_START  . . . . . . . . . . .	Number	 0001h	 
+SECTOR_SIZE  . . . . . . . . . .	Number	 0200h	 
+black  . . . . . . . . . . . . .	Number	 0000h	 
+blue . . . . . . . . . . . . . .	Number	 0001h	 
+brown  . . . . . . . . . . . . .	Number	 0006h	 
+cyan . . . . . . . . . . . . . .	Number	 0003h	 
+dirbuf . . . . . . . . . . . . .	Directory  126A	    _DATA	
+driveNumber  . . . . . . . . . .	Byte	 2E6A	  _DATA	
+exit . . . . . . . . . . . . . .	Text   	 .EXIT
+fattable . . . . . . . . . . . .	Word	 006A	  _DATA	
+gray . . . . . . . . . . . . . .	Number	 0008h	 
+green  . . . . . . . . . . . . .	Number	 0002h	 
+heading  . . . . . . . . . . . .	Byte	 0000	  _DATA	
+lightBlue  . . . . . . . . . . .	Number	 0009h	 
+lightCyan  . . . . . . . . . . .	Number	 000Bh	 
+lightGray  . . . . . . . . . . .	Number	 0007h	 
+lightGreen . . . . . . . . . . .	Number	 000Ah	 
+lightMagenta . . . . . . . . . .	Number	 000Dh	 
+lightRed . . . . . . . . . . . .	Number	 000Ch	 
+magenta  . . . . . . . . . . . .	Number	 0005h	 
+red  . . . . . . . . . . . . . .	Number	 0004h	 
+white  . . . . . . . . . . . . .	Number	 000Fh	 
+yellow . . . . . . . . . . . . .	Number	 000Eh	 
+
+	   0 Warnings
+	   0 Errors

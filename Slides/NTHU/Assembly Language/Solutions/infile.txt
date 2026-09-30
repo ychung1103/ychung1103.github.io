@@ -1,0 +1,35 @@
+MS-DOS and the IBM-PC
+
+IBM's PC-DOS was the first operating system to implement Real-address mode on the IBM Personal
+Computer, using the Intel 8088 processor. Later, it evolved into Microsoft MS-DOS.
+Because of this history, it makes sense to use MS-DOS as the environment for explaining all
+about Real-mode programming. Real-address mode is frequently called 16-bit mode because
+addresses are constructed from 16-bit values.
+
+In this chapter, you will learn the basic memory organization of MS-DOS, how to activate
+MS-DOS function calls (called interrupts), and how to perform basic input-output operations at
+the operating system level. All of the programs in this chapter run in Real-address mode because
+they use the INT instruction. Interrupts were originally designed to run under MS-DOS in Real-address
+mode. It is possible to call interrupts in Protected mode, but the techniques for doing so
+are beyond the scope of this book.
+
+Real-address mode programs have the following characteristics:
+ They can only address 1 megabyte of memory.
+ Only one program can run at once (single tasking) in a single session.
+ No memory boundary protection is possible, so any application program can overwrite
+memory used by the operating system.
+ Offsets are 16 bits
+
+When it first appeared, the IBM PC had a strong appeal because it was affordable, and it
+ran Lotus 1-2-3, the electronic spreadsheet program that was instrumental in the PC's adoption
+by businesses. Computer hobbyists loved the PC because it was an ideal tool for learning how
+computers work. It should be noted that Digital Research CP/M, the most popular 8-bit operating
+system before PC-DOS, was only capable of addressing 64K of RAM. From this point of
+view, PC-DOS's 640K seemed like a gift from heaven.
+
+Because of the obvious memory and speed limitations of the early Intel microprocessors,
+the IBM-PC was a single-user computer. There was no built-in protection against memory corruption
+by application programs. In contrast, the mincomputer systems available at the time
+could handle multiple users, and prevented application programs from overwriting each other's
+data. Over time, more robust operating systems for the PC have become available, making it a
+viable alternative to minicomputer systems, particularly when PCs are networked together.
